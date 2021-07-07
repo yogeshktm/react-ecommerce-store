@@ -34,6 +34,7 @@ export default function MyProfile(props) {
     city = item.address.city;
     zip_code = item.address.zipcode;
     sessionStorage.setItem("userid", item.id);
+    return item;
   });
   sessionStorage.setItem("firstname", JSON.stringify(uname));
 

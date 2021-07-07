@@ -9,7 +9,6 @@ export default function LoginContainer(props) {
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState(0);
   const [loginEmpty, setLoginEmpty] = useState(0);
-  const [token, setToken] = useState();
 
   useEffect(() => {
     WelcomeUser();
@@ -42,7 +41,6 @@ export default function LoginContainer(props) {
               setLoginError(1);
             } else {
               setLoginError(0);
-              setToken(res.token);
               sessionStorage.setItem("token", JSON.stringify(res.token));
               sessionStorage.setItem("username", username);
               myContext.setAsLoggedin(1);

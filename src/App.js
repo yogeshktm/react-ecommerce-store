@@ -9,7 +9,7 @@ import AppContext from "./components/AppContext";
 import { Route, Switch } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import MyProfileContainer from "./container/MyProfileContainer";
-import CartContainer from "./container/CartContainer";
+// import CartContainer from "./container/CartContainer";
 
 function App() {
   const [isLoggedin, setAsLoggedin] = useState(0);
@@ -86,10 +86,10 @@ function App() {
               )
             }
           ></Route>
-          <Route
+          {/* <Route
             path="/cart"
             component={() => <CartContainer></CartContainer>}
-          ></Route>
+          ></Route> */}
         </Switch>
       </AppContext.Provider>
     </div>
