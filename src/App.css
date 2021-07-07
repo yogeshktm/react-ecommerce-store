@@ -1,38 +1,143 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&display=swap");
+
+:root {
+  --text-color: #2d2d2d;
+  --background: #fff;
+}
+.dark-mode {
+  --text-color: #fff;
+  --background: #2d2d2d;
+}
 .App {
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  font-family: "Raleway", sans-serif;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.product-img {
+  max-width: 100%;
+  min-height: 200px;
+  max-height: 200px;
+  object-fit: contain;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.product-detail-img {
+  width: 50%;
+}
+.product-detail-img img {
+  max-width: 100%;
+}
+.product-info {
+  width: 50%;
+  text-align: left;
+  padding: 20px;
+}
+.product-detail {
   display: flex;
-  flex-direction: column;
+}
+.app-header {
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  border-bottom: 3px dotted #fa678c;
+  display: flex;
+  margin-bottom: 20px;
+  position: relative;
+  text-align: left;
+  background: var(--background);
 }
-
-.App-link {
-  color: #61dafb;
+.app-header .logo {
+  max-width: 250px;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.main-menu ul {
+  list-style: item;
+}
+.main-menu ul li {
+  display: inline-block;
+  margin: 0 10px;
+}
+.main-menu ul li a {
+  color: var(--text-color);
+  text-transform: capitalize;
+}
+.product-list-title {
+  color: var(--text-color);
+  min-height: 75px;
+}
+.product-list-item a {
+  text-decoration: none;
+}
+.back-link {
+  color: var(--text-color);
+}
+.plp-price {
+  font-size: 18px;
+  font-weight: 600;
+}
+.product-list-item--loader .product-img--loader {
+  width: 150px;
+  height: 150px;
+  background: #ddd;
+  margin: 0 auto 20px auto;
+}
+.plp-title--loader p {
+  width: 100%;
+  background: #ddd;
+  height: 10px;
+  margin: 5px 0;
+}
+.plp-title--loader p:nth-child(3) {
+  width: 75%;
+}
+.plp-price--loader {
+  width: 50%;
+  background: #ddd;
+  height: 15px;
+  margin: 15px 0 0px 0;
+}
+.login-form input {
+  display: block;
+  margin: 0 auto 10px auto;
+  padding: 10px;
+  max-width: 250px;
+  width: 100%;
+  border-radius: 4px;
+}
+.btn-primary {
+  appearance: none;
+  background: #fa5781;
+  color: #fff;
+  border: 0;
+  padding: 10px 20px;
+  font-weight: bold;
+}
+.error {
+  color: #ea0000;
+}
+.my-profile-wrapper {
+  text-align: left;
+}
+.my-account {
+  position: relative;
+}
+.my-account-dropdown {
+  position: absolute;
+  top: 100%;
+  background: #ddd;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+}
+.my-account-dropdown li {
+  padding: 5px;
+}
+.my-account-dropdown a {
+  color: #000;
+}
+.cart-icon {
+  width: 20px;
+  margin-left: 20px;
+}
+.dark-mode-toggle {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
