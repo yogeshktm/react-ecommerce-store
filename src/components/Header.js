@@ -6,6 +6,7 @@ import React, { useState, useContext } from "react";
 import AppContext from "./AppContext";
 import Switch from "@material-ui/core/Switch";
 import cartIcon from "../images/shopping-cart.png";
+import getFirebase from "../firebase";
 
 export default function Header(props) {
   const MyContext = useContext(AppContext);
@@ -13,6 +14,8 @@ export default function Header(props) {
   const [state, setState] = React.useState({
     darkMode: false,
   });
+  const firebaseInstance = getFirebase();
+
   const handleChange = (event) => {
     setState({
       ...state,
@@ -26,11 +29,19 @@ export default function Header(props) {
       rootElement.classList.remove("dark-mode");
     }
   };
-  const logout = () => {
+  const logout = async () => {
     if (MyContext.isLoggedin) {
-      sessionStorage.clear();
-      MyContext.setAsLoggedin(0);
-      window.location.href = "/login";
+      try {
+        if (firebaseInstance) {
+          await firebaseInstance.auth().signOut();
+          MyContext.setAsLoggedin(0);
+          sessionStorage.clear();
+          window.location.href = "/login";
+          alert("Successfully signed out!");
+        }
+      } catch (error) {
+        console.log("error", error);
+      }
     }
   };
   const openDropdown = () => {

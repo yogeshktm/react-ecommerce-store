@@ -1,21 +1,20 @@
+import loaderImg from '../images/785.gif';
+import { Link } from "react-router-dom";
+
 export default function Login(props) {
-  const { getUserName, getPassword, handleSubmit } = props;
-  return (
-    <div className="login">
-      <h2>Login</h2>
-      <p className="error">
-        {props.error ? "Username/password is incorrect" : ""}
-      </p>
-      {props.empty ? (
-        <p className="error">Login/Password should not be empty</p>
-      ) : (
-        <></>
-      )}
-      <form className="login-form" onSubmit={handleSubmit}>
-        <input type="text" placeholder="username" onChange={getUserName} />
-        <input type="password" placeholder="password" onChange={getPassword} />
-        <button className="btn-primary">submit</button>
-      </form>
-    </div>
-  );
+    const { email, pwd, handleLogin, loginStatus, loginErrorMessage, isLoading } = props;
+    return (
+        <div className="login">
+            <h2>Login</h2>
+            <form className="login-form" onSubmit={handleLogin}>
+                <input type="email" placeholder="email" {...email} required />
+                <input type="password" placeholder="password" {...pwd} required />
+                <button className="btn-primary login-btn">{isLoading ? <img src={loaderImg} alt="Loading..." /> : 'Login'}</button>
+                <Link className="forget-link" to="/forget-password">Forget password</Link>
+            </form>
+            {
+                loginStatus ? <p className="error">{loginErrorMessage}</p> : ""
+            }
+        </div>
+    );
 }

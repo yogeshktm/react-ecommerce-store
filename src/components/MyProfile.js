@@ -1,7 +1,9 @@
+
 import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
+import loaderImg from '../images/785.gif';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,28 +18,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MyProfile(props) {
   const classes = useStyles();
-  let uname;
-  let lname;
-  let email;
-  let phone;
-  let flat_no;
-  let street;
-  let city;
-  let zip_code;
-  props.data.map(function (item) {
-    uname = item.name.firstname;
-    lname = item.name.lastname;
-    email = item.email;
-    phone = item.phone;
-    flat_no = item.address.number;
-    street = item.address.street;
-    city = item.address.city;
-    zip_code = item.address.zipcode;
-    sessionStorage.setItem("userid", item.id);
-    return item;
-  });
-  sessionStorage.setItem("firstname", JSON.stringify(uname));
-
   return (
     <Container maxWidth="md">
       <div className="my-profile-wrapper">
@@ -45,44 +25,59 @@ export default function MyProfile(props) {
           <Grid item xs={12} sm={12}>
             <Paper className={classes.paper}>
               <h3>
-                Welcome, {uname} {lname}
+                Welcome, {props.isLoading ? <img src={loaderImg} /> : props.data.displayName ? props.data.displayName : "User"}
               </h3>
             </Paper>
           </Grid>
         </Grid>
         <Grid container spacing={3}>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={12}>
             <Paper className={classes.paper}>
-              <p>
-                <label>
-                  <strong>Email: </strong>
-                </label>
-                {email}
-              </p>
-              <p>
-                <label>
-                  <strong>Phone: </strong>
-                </label>
-                {phone}
-              </p>
-            </Paper>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Paper className={classes.paper}>
-              <p>
-                <label>
-                  <strong>My address:</strong>
-                </label>
-              </p>
-              <p>
-                {flat_no},{street}
-              </p>
-              <p>{city}</p>
-              <p>{zip_code}</p>
+              <form onSubmit={props.handleUpdate} className="updateProfile">
+                <input type="text" placeholder="Your name" {...props.dName} required />
+                <button>Update</button>
+              </form>
             </Paper>
           </Grid>
         </Grid>
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={12}>
+            <Paper className={classes.paper}>
+              <h3>Change password</h3>
+              <form onSubmit={props.handlePwdUpdate} className="updateProfile">
+                <input type="password" placeholder="New Password" {...props.newPwd} required />
+                <input type="password" onChange={props.checkPwd} placeholder="Confirm new Password" {...props.confirmNewPwd} required />
+                <button>Update</button>
+                {props.pwdMatch ? <p className="success">Password Match</p> : <p className="error">Passwords not match</p>}
+              </form>
+            </Paper>
+          </Grid>
+        </Grid>
+
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={4}>
+            <Paper className={classes.paper}>
+              <figure className="profile-pic">
+                <img src={props.data.photoURL} />
+              </figure>
+              <p>
+              </p>
+            </Paper>
+          </Grid>
+          <Grid item xs={12} sm={8}>
+            <Paper className={classes.paper}>
+              <p>
+                <label>
+                  <strong>Email: {props.data.email}&nbsp;{props.data.emailVerified ? <span className="email-vertified success">Verified</span> : <span className="email-not-verified error">&nbsp;Email not vertified</span>}{props.data.emailVerified ? null : <a onClick={props.emailVertify} href="#">vertify</a>}</strong>
+                </label>
+              </p>
+              <p>
+              </p>
+            </Paper>
+          </Grid>
+
+        </Grid>
       </div>
-    </Container>
+    </Container >
   );
 }

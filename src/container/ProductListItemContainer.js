@@ -10,9 +10,10 @@ export default function ProductListItemContainer(props) {
   const [productData, setProductData] = useState();
   const [isLoading, setLoading] = useState(0);
   const [categoryName, setCategoryName] = useState();
+
   useEffect(() => {
-    loadProducts(); // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [categoryName]);
+    loadProducts();
+  }, []); //es
   useEffect(() => {
     setCategory();
   });
